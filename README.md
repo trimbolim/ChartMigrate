@@ -25,6 +25,12 @@ CLI options
 ```
 --chair limit the actions to one chair folder
 --no-copy don't copy the files to the new location
+```
 
+## dependencies
+https://github.com/coherentgraphics/cpdflib-binary
 
+```
+pip install pycpdflib
+```
   
