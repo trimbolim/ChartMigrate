@@ -21,9 +21,9 @@ def get_snc_charts():
 
     # Decode the JSON response into a dictionary and use the data
     data = response.json()
-    print(data)
+    #print(data)
     chart_by_num = {}
     for chart in data['result']:
-        print (chart['u_sort_field'])
+        #print (chart['u_sort_field'])
         chart_by_num[chart['u_sort_field']] = chart
     return chart_by_num
