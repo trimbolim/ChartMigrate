@@ -33,4 +33,8 @@ https://github.com/coherentgraphics/cpdflib-binary
 ```
 pip install pycpdflib
 ```
-  
+Do:
+- Restructure disco_files to allow multiple files for one chart_num index. i.e. tpt1 tpt2
+- move chairs list into config.py
+- define output dir in config.py - update file writes to use that path
+ 
