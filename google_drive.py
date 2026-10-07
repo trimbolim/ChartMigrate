@@ -14,7 +14,12 @@ def discover_files(chair_dir):
     disco_chair = ""
     homeless_files = [] 
 
+    #print (f"inspecting {chair_dir}")
+
     for file in files_only:
+        if not file.name.endswith("pdf"):
+            continue
+        #print (f"inspecting {file.name} in {chair_dir}")
 
         # ambiguous case with 3 digit index but multiple digits found
         #elif three_digit_index and len(digit_groups) > 1 and tptmatch and file_chair_num:
@@ -52,12 +57,19 @@ def discover_files(chair_dir):
 
         if not disco_chartnum:
             homeless_files.append(file.name)
+        # if we haven't seen this chartnum yet
         elif disco_chartnum not in disco_files:
             disco_files[disco_chartnum] = {}
-            disco_files[disco_chartnum]['chair'] = disco_chair
-            disco_files[disco_chartnum]['filename'] = file.name
+            #disco_files[disco_chartnum][] = {}
+            disco_files[disco_chartnum][disco_chair] = {}
+            disco_files[disco_chartnum][disco_chair]['filename'] = file.name
+        # if we have seen this chartnum yet we may not have seen it for this chair
+        elif disco_chair not in disco_files[disco_chartnum]:
+            disco_files[disco_chartnum][disco_chair] = {}
+            disco_files[disco_chartnum][disco_chair]['filename'] = file.name
         else:
-            print (f'WARN: I already have a key for {chair_dir} {disco_chartnum} {file.name}')
+            print (f'WARN: I already have a key for {disco_chair} {disco_chartnum} {file.name}')
+            print (f'WARN: existing entry: {disco_files[disco_chartnum][disco_chair]['filename']}')
 
     return disco_files,homeless_files
 
@@ -77,7 +89,7 @@ def chair_from_filename(fname):
 def chartnum_from_filename(fname):
     # I should do the multiple digits test up here
     digit_groups = re.findall(r'\d+',fname)
-    three_digit_match = re.search(r'\d{3}',fname)
+    three_digit_match = re.search(r'\b\d{3}\b',fname)
     three_digit_index = ""
     if three_digit_match: 
         three_digit_index = three_digit_match.group()
@@ -86,3 +98,7 @@ def chartnum_from_filename(fname):
         three_digit_index = f'{int(two_digit_match.group()):03d}'
     chartnum = three_digit_index
     return chartnum
+
+def process_file(source_path,dest_path,snc_chart_data):
+    pass
+    return

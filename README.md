@@ -34,7 +34,17 @@ https://github.com/coherentgraphics/cpdflib-binary
 pip install pycpdflib
 ```
 Do:
-- Restructure disco_files to allow multiple files for one chart_num index. i.e. tpt1 tpt2
-- move chairs list into config.py
-- define output dir in config.py - update file writes to use that path
+- done: Restructure disco_files to allow multiple files for one chart_num index. i.e. tpt1 tpt2
+- done: move chairs list into config.py
+- done: define output dir in config.py - update file writes to use that path
+- do: create process_file function
+- do: rather than hand compare the remaining dups...
+
+```
+import filecmp
+
+# Returns True if they match, False otherwise
+is_equal = filecmp.cmp('file1.bin', 'file2.bin', shallow=False)
+print(f"Files match: {is_equal}")
+```
  
