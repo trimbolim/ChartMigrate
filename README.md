@@ -37,14 +37,11 @@ Do:
 - done: Restructure disco_files to allow multiple files for one chart_num index. i.e. tpt1 tpt2
 - done: move chairs list into config.py
 - done: define output dir in config.py - update file writes to use that path
-- do: create process_file function
-- do: rather than hand compare the remaining dups...
+- done: create process_file function
+- done: rather than hand compare the remaining dups do a file compare
+- do: create a file discovery case for finding a completely valid and finished filename
+- do: start adding useful args for spot cleanup rather than full migration
+- do: make a chart report that tells us what's missing
+- do: make a way for the chart report to update SNC on parts status - u_missing_parts
 
-```
-import filecmp
-
-# Returns True if they match, False otherwise
-is_equal = filecmp.cmp('file1.bin', 'file2.bin', shallow=False)
-print(f"Files match: {is_equal}")
-```
  

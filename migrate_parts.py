@@ -34,11 +34,12 @@ for chair_dir in config.chair_dirs:
             #print (f"{disco_files[chart]} is {chart} which becomes {chart}-{chair}-{snc_charts[chart]['u_slug']}.pdf")
             for disco_chair in disco_files[chart]:
                 src_fn = disco_files[chart][disco_chair]['filename'] 
-                src_path = config.source_parts_root + src_fn
+                src_dir = disco_files[chart][disco_chair]['src_dir'] 
+                src_path = src_dir + src_fn
 
                 slug = snc_charts[chart]['u_slug']
                 dest_fn = f"{chart}-{disco_chair}-{slug}.pdf"
-                dest_path = config.dest_parts_root + dest_fn
+                dest_path = f"{config.dest_parts_root}{disco_chair}/{dest_fn}"
 
                 chart_data = snc_charts[chart]
 
