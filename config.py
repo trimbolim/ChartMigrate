@@ -1,5 +1,9 @@
+
+snc_hostname = "swingshift.service-now.com"
+
 source_parts_root = "/Users/matthewtrimboli/Google Drive/My Drive/Swing Shift/Charts/Parts/"
 dest_parts_root = "/Users/matthewtrimboli/Google Drive/My Drive/Swing Shift/Charts/NewParts/"
+setlist_root = "/Users/matthewtrimboli/Google Drive/My Drive/Swing Shift/Setlists/"
 report_dir = "output/"
 
 chair_dirs = [

@@ -39,9 +39,11 @@ Do:
 - done: define output dir in config.py - update file writes to use that path
 - done: create process_file function
 - done: rather than hand compare the remaining dups do a file compare
-- do: create a file discovery case for finding a completely valid and finished filename
+- done: create a file discovery case for finding a completely valid and finished filename
 - do: start adding useful args for spot cleanup rather than full migration
-- do: make a chart report that tells us what's missing
-- do: make a way for the chart report to update SNC on parts status - u_missing_parts
+- done: make a chart report that tells us what's missing
+- done: make a way for the chart report to update SNC on parts status - u_missing_parts
+- done: investigate making setlists and publishing to google drive
+- do: have migrate by default skip files already existing at dest
 
  

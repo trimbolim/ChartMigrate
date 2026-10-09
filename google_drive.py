@@ -22,11 +22,11 @@ def get_file_list(chair_dir):
     return file_list
 
 
-def discover_files(chair_dir):
+def discover_files(chair_dir, root_dir):
 
     # iterate through the files in chair_dir and return a dictionary of 
     # filenames and discovered chairs indexed by the 3 digit chart number
-    chair_path = config.source_parts_root + chair_dir
+    chair_path = root_dir + chair_dir
 
     files_only = [item for item in Path(chair_path).iterdir() if item.is_file()]
     disco_files = {}
@@ -63,18 +63,18 @@ def discover_files(chair_dir):
             #disco_files[disco_chartnum][] = {}
             disco_files[disco_chartnum][disco_chair] = {}
             disco_files[disco_chartnum][disco_chair]['filename'] = file.name
-            disco_files[disco_chartnum][disco_chair]['src_dir'] = f"{config.source_parts_root}{chair_dir}/"
+            disco_files[disco_chartnum][disco_chair]['src_dir'] = f"{root_dir}{chair_dir}/"
         # if we have seen this chartnum yet we may not have seen it for this chair
         elif disco_chair not in disco_files[disco_chartnum]:
             disco_files[disco_chartnum][disco_chair] = {}
             disco_files[disco_chartnum][disco_chair]['filename'] = file.name
-            disco_files[disco_chartnum][disco_chair]['src_dir'] = f"{config.source_parts_root}{chair_dir}/"
+            disco_files[disco_chartnum][disco_chair]['src_dir'] = f"{root_dir}{chair_dir}/"
         else:
             print (f"######### while in {chair_dir} I found a part for {disco_chair} ########")
             print (f'WARN: I already have a key for {disco_chartnum}-{disco_chair}: {file.name}')
             print (f'existing filename: {disco_files[disco_chartnum][disco_chair]['filename']}')
-            thisfile = f"{config.source_parts_root}{chair_dir}/{file.name}"
-            thatfile = f"{config.source_parts_root}{chair_dir}/{disco_files[disco_chartnum][disco_chair]['filename']}"
+            thisfile = f"{root_dir}{chair_dir}/{file.name}"
+            thatfile = f"{root_dir}{chair_dir}/{disco_files[disco_chartnum][disco_chair]['filename']}"
             if filecmp.cmp(thisfile,thatfile):
                 print ("but the duplicate is the same file")
             else:

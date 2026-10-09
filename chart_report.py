@@ -40,19 +40,31 @@ for chart in snc_charts:
 
 for chair_dir in config.chair_dirs:
     #print(f"checking {chair_dir}")
-    file_list = google_drive.get_file_list(chair_dir)
+    # convert this to use google_drive.discover_files() - should be simple
+    disco_files,homeless_files = google_drive.discover_files(chair_dir,config.dest_parts_root)
+    #file_list = google_drive.get_file_list(chair_dir)
     #print (f"got {len(file_list)} files")
 
     for chart in snc_charts:
-        for file in file_list:
-            if chart in file:
+        if chart in disco_files and chair_dir in disco_files[chart]:
+            if 'filename' in disco_files[chart][chair_dir]:
                 disco_file_count[chart].append(chair_dir)
 
-outlist = []
-print (f"count,chart_num,chart_slug,missing_parts")
 
 for chart in disco_file_count:
+
     difference = list(set(core_chairs) - set(disco_file_count[chart]))
-    #difference = list(set(disco_file_count[chart]) ^ set(core_chairs))
-    print (f"{len(disco_file_count[chart])},{chart},{snc_charts[chart]['u_slug']},{"|".join(difference)}")
-    #outlist.append(f"{len(disco_file_count[chart])} {chart}-{snc_charts[chart]['u_slug']}")
+    diff_string = "|".join(sorted(difference))
+    chart_uuid = snc_charts[chart]['sys_id']
+    snc_missing_parts = snc_charts[chart]['u_missing_parts']
+
+    if diff_string and not diff_string == snc_missing_parts:
+        #print (f"these differ")
+        #print (f"we say: {diff_string}")
+        #print (f"snc: {snc_missing_parts}")
+        res = snc_utils.update_missing_parts(chart_uuid,diff_string)
+        res = True
+        if res:
+            print (f"updated {chart} with {diff_string}")
+        else:
+            print ("update failed")

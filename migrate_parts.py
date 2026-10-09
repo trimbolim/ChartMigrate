@@ -21,7 +21,7 @@ for chair_dir in config.chair_dirs:
     # the dictionary would have the padded number as the key
     # this will pick up some crud, but we'll just have to see
     # we could use the dictionary to track our progress on migrating the files themselves
-    disco_files,homeless_files = google_drive.discover_files(chair_dir)
+    disco_files,homeless_files = google_drive.discover_files(chair_dir,config.source_parts_root)
     #print(disco_files)
 
     # perhaps we could just compare the snc parts dict to
