@@ -34,6 +34,8 @@ def forscore_setlist(raw_set_list, chair):
     root = ET.Element("forScore", kind="setlist", version="1.0", title=raw_set_list['gig_name'])
 
     for set_pos in sorted(raw_set_list['sets']):
+        placeholder_title = f"Set {set_pos}"
+        score = ET.SubElement(root, "placeholder", title=placeholder_title)
         for list_pos in raw_set_list['sets'][set_pos]['ordered_charts']:
 
             path = f"{list_pos['u_chart.u_sort_field']}-{chair}-{list_pos['u_chart.u_slug']}.pdf"

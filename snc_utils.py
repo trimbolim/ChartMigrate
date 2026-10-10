@@ -52,6 +52,49 @@ def update_missing_parts(chart_uuid, missing_parts_string):
 
     return True
 
+def get_gigs_with_setlist():
+
+    gigs = {}
+
+    # https://swingshift.service-now.com/api/now/table/u_set_position?sysparm_query=u_gig.u_date%3Ejavascript%3Ags.endOfToday()&sysparm_exclude_reference_link=True&sysparm_fields=u_position%2Cu_gig.u_name%2Cu_gig.sys_id
+    snc_path = "/api/now/table/"
+    snc_table = "u_set_position"
+    sysparm_query = f"u_gig.u_date>javascript:gs.endOfToday()"
+    sysparm_exclude_reference_link = "True"
+    snc_fields = ["u_gig.sys_id","u_gig.u_name","u_gig.u_date"]
+
+    url = f"https://{config.snc_hostname}{snc_path}{snc_table}"
+    url += f"?sysparm_query={sysparm_query}"
+    url += f"&sysparm_exclude_reference_link={sysparm_exclude_reference_link}"
+    url += f"&sysparm_fields={','.join(snc_fields)}"
+
+    # Eg. User name="admin", Password="admin" for this code sample.
+    user = os.getenv('SNC_USER')
+    pwd = os.getenv('SNC_PWD')
+
+    # Set proper headers
+    headers = {"Content-Type":"application/json","Accept":"application/json"} 
+
+    # Do the HTTP request
+    response = requests.get(url, auth=(user, pwd), headers=headers )    
+
+    # Check for HTTP codes other than 200
+    if response.status_code != 200: 
+        print('Status:', response.status_code, 'Headers:', response.headers, 'Error Response:',response.json())
+        exit()
+
+    # Decode the JSON response into a dictionary and use the data
+    gig_data = response.json()
+
+    #pprint.pprint(gig_data)
+
+    for set_pos in gig_data['result']:
+        #print (f"set pos is {set_pos}")
+        gigs[(set_pos['u_gig.sys_id'])] = set_pos
+
+    return gigs
+
+
 def get_setlist_by_gig (gig_sys_id):
 
     gig_set_list = {}

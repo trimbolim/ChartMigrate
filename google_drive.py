@@ -120,12 +120,12 @@ def chartnum_from_filename(fname):
     chartnum = three_digit_index
     return chartnum
 
-def process_file(source_path,dest_path,snc_chart_data):
+def process_file(source_path,dest_path,snc_chart_data, *, range=None, force=None):
     print (f"take {source_path} and push it to {dest_path} with title: {snc_chart_data['u_title']} ")
 
     pathobj = Path(dest_path)
 
-    if pathobj.is_file():
+    if pathobj.is_file() and not force:
         print (f"{dest_path} exists - skipping ")
         return
     else:
@@ -136,16 +136,24 @@ def process_file(source_path,dest_path,snc_chart_data):
     pdfproducer = snc_chart_data['u_arranger'] 
     subject = snc_chart_data['u_style'] 
 
-    srcpdf = pycpdflib.fromFile(source_path, "")
 
-    pycpdflib.setTitle(srcpdf,title)
-    pycpdflib.setAuthor(srcpdf,author)
-    pycpdflib.setProducer(srcpdf,pdfproducer)
-    pycpdflib.setSubject(srcpdf,subject)
+    destpdf = None
+
+    if range==None:
+        destpdf = pycpdflib.fromFile(source_path, "")
+    else:
+        pdf = pycpdflib.fromFile(source_path, "")
+        r = pycpdflib.pageRange(range[0],range[1])
+        destpdf = pycpdflib.selectPages(pdf, r)
+
+    pycpdflib.setTitle(destpdf,title)
+    pycpdflib.setAuthor(destpdf,author)
+    pycpdflib.setProducer(destpdf,pdfproducer)
+    pycpdflib.setSubject(destpdf,subject)
 
     print (f"writing {dest_path}")
-    pycpdflib.toFile(srcpdf, dest_path, False, False)
-    exit
+    pycpdflib.toFile(destpdf, dest_path, False, False)
+
     return
 
 def chartnum_from_strange_filename(fname):

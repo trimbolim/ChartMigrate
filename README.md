@@ -32,6 +32,7 @@ https://github.com/coherentgraphics/cpdflib-binary
 
 ```
 pip install pycpdflib
+pip install pyyaml
 ```
 Do:
 - done: Restructure disco_files to allow multiple files for one chart_num index. i.e. tpt1 tpt2
@@ -40,10 +41,11 @@ Do:
 - done: create process_file function
 - done: rather than hand compare the remaining dups do a file compare
 - done: create a file discovery case for finding a completely valid and finished filename
-- do: start adding useful args for spot cleanup rather than full migration
 - done: make a chart report that tells us what's missing
 - done: make a way for the chart report to update SNC on parts status - u_missing_parts
 - done: investigate making setlists and publishing to google drive
-- do: have migrate by default skip files already existing at dest
-
+- done: query SNC for gigs with setlists available to use
+- done: have migrate by default skip files already existing at dest
+- done: enhance chart split to use the data directly from SNC
+- do: start adding useful args for spot cleanup rather than full migration
  

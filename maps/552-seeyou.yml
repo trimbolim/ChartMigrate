@@ -1,0 +1,22 @@
+---
+destinations:
+  path_prefix: Parts
+  chairs:
+    alto1: [10,10]
+    alto2: [11,11]
+    tenor1: [12,12]
+    tenor2: [13,13] 
+    bari: [14,14]
+    bass: [28,29]
+    drums: [30,31]
+    guitar: [24,25]
+    piano: [26,27]
+    trombone1: [19,20]
+    trombone2: [21,21]
+    trombone3: [22,22]
+    trombone4: [23,23]
+    trumpet1: [15,15]
+    trumpet2: [16,16]
+    trumpet3: [17,17]
+    trumpet4: [18,18]
+...
