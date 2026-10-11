@@ -47,5 +47,6 @@ Do:
 - done: query SNC for gigs with setlists available to use
 - done: have migrate by default skip files already existing at dest
 - done: enhance chart split to use the data directly from SNC
+- do: add XMP metadata instead or in addition to old metadata
 - do: start adding useful args for spot cleanup rather than full migration
  
