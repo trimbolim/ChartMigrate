@@ -49,4 +49,8 @@ Do:
 - done: enhance chart split to use the data directly from SNC
 - do: add XMP metadata instead or in addition to old metadata
 - do: start adding useful args for spot cleanup rather than full migration
+- do: re chart split map format- only use first page of part and extrapolate range from that - function to get ranges
+- do: add a force option for migrate to overwrite destination files
+
+
  
