@@ -151,6 +151,11 @@ def process_file(source_path,dest_path,snc_chart_data, *, range=None, force=None
     pycpdflib.setProducer(destpdf,pdfproducer)
     pycpdflib.setSubject(destpdf,subject)
 
+    pycpdflib.setTitleXMP(destpdf,title)
+    pycpdflib.setAuthorXMP(destpdf,author)
+    pycpdflib.setProducerXMP(destpdf,pdfproducer)
+    pycpdflib.setSubjectXMP(destpdf,subject)
+
     print (f"writing {dest_path}")
     pycpdflib.toFile(destpdf, dest_path, False, False)
 
